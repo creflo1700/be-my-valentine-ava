@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Proposal for Ava</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
+            color: #2c3e50;
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Floral decorations */
+        .flower {
+            position: fixed;
+            opacity: 0.3;
+            pointer-events: none;
+            font-size: 3em;
+        }
+        
+        .flower1 { top: 5%; left: 5%; animation: float 6s ease-in-out infinite; }
+        .flower2 { top: 10%; right: 8%; animation: float 8s ease-in-out infinite; }
+        .flower3 { bottom: 15%; left: 10%; animation: float 7s ease-in-out infinite; }
+        .flower4 { bottom: 10%; right: 5%; animation: float 9s ease-in-out infinite; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .container {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(70, 130, 180, 0.2);
+            max-width: 600px;
+            text-align: center;
+            z-index: 10;
+            border: 3px solid #b0bec5;
+        }
+        
+        h1 {
+            color: #1e90ff;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .romantic-message {
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .button {
+            border: none;
+            border-radius: 50px;
+            padding: 15px 35px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .yes-button {
+            background-color: #ff69b4;
+            color: white;
+        }
+        
+        .yes-button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+        }
+        
+        .no-button {
+            background-color: #b0bec5;
+            color: white;
+            position: relative;
+        }
+        
+        .no-button:hover {
+            transform: scale(0.9);
+        }
+        
+        .success-message {
+            display: none;
+            color: #ff69b4;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floral decorations -->
+    <div class="flower flower1">🌸</div>
+    <div class="flower flower2">🌹</div>
+    <div class="flower flower3">🌸</div>
+    <div class="flower flower4">🌹</div>
+    
+    <div class="container">
+        <h1>Will you be my valentine, Ava? 💙</h1>
+        
+        <div class="romantic-message">
+            <p>From the moment you came into my life, every day became a beautiful garden of moments with you. Like peonies and garden roses in full bloom, your love makes everything more beautiful.</p>
+            <p style="margin-top: 15px;">I can't imagine my life without you. So, will you be my valentine?</p>
+        </div>
+        
+        <div class="buttons-container">
+            <button class="button yes-button" onclick="handleYes()">Yes 💖</button>
+            <button class="button no-button" onclick="handleNo(event)">No 🙃</button>
+        </div>
+        
+        <div class="success-message">
+            🎉 You've made me the happiest person alive, Ava! 🎉
+        </div>
+    </div>
+    
+    <script>
+        let noButtonClickCount = 0;
+        
+        function handleYes() {
+            const yesButton = document.querySelector('.yes-button');
+            yesButton.style.transform = `scale(${1 + noButtonClickCount * 0.2})`;
+            
+            if (noButtonClickCount >= 3) {
+                document.querySelector('.success-message').style.display = 'block';
+                document.querySelector('.buttons-container').style.opacity = '0.5';
+                document.querySelector('.buttons-container').style.pointerEvents = 'none';
+            }
+        }
+        
+        function handleNo(event) {
+            noButtonClickCount++;
+            const noButton = event.target;
+            
+            // Shrink the button
+            noButton.style.transform = `scale(${Math.max(0.3, 1 - noButtonClickCount * 0.3)})`;
+            
+            // Move button to random position
+            const randomX = Math.random() * 80 - 40;
+            const randomY = Math.random() * 80 - 40;
+            noButton.style.position = 'relative';
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+            
+            // Change text after a few clicks
+            if (noButtonClickCount === 2) {
+                noButton.innerText = 'Really? 😔';
+            } else if (noButtonClickCount === 3) {
+                noButton.innerText = 'Say yes! 🥺';
+            } else if (noButtonClickCount >= 4) {
+                noButton.innerText = 'Just yes! 💕';
+            }
+        }
+    </script>
+</body>
+</html>
